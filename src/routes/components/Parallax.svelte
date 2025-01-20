@@ -1,77 +1,88 @@
 <script>
   import { onMount } from 'svelte';
-  let scrollY = 0;
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  const handleScroll = () => {
-    scrollY = window.scrollY;
-  };
+  gsap.registerPlugin(ScrollTrigger);
 
   onMount(() => {
-    window.addEventListener('scroll', handleScroll);
+    // Apply parallax effect to sections with the class "parallax"
+    gsap.utils.toArray(".parallax").forEach((section, i) => {
+      section.bg = section.querySelector(".bg");
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+      // Assign random images for backgrounds
+      section.bg.style.backgroundImage = `url(https://picsum.photos/${innerWidth}/${innerHeight}?random=${i})`;
+
+      // Apply parallax effect
+      if (i) {
+        section.bg.style.backgroundPosition = `50% ${innerHeight / 2}px`;
+
+        gsap.to(section.bg, {
+          backgroundPosition: `50% ${-innerHeight / 2}px`,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            scrub: true,
+          },
+        });
+      }
+    });
   });
-
-  // Array for section data
-  const sections = [
-    { name: 'Africa', color: '#FF5733' },
-    { name: 'Antarctica', color: '#33C4FF' },
-    { name: 'Asia', color: '#33FF57' },
-    { name: 'Australia', color: '#FFC433' },
-    { name: 'Europe', color: '#C433FF' },
-    { name: 'North America', color: '#FF33A8' },
-    { name: 'South America', color: '#33FF94' },
-    { name: 'Atlantis', color: '#5C33FF' },
-    { name: 'Pacific', color: '#33FFF5' },
-    { name: 'Amazon', color: '#FF8C33' },
-    { name: 'Arctic', color: '#338FFF' },
-    { name: 'Sahara', color: '#FFC133' },
-  ];
 </script>
 
+<header>
+ 
+</header>
+
+<section>
+  <div class="bg"></div>
+  <h1>Regular section</h1>
+</section>
+<section class="parallax">
+  <div class="bg"></div>
+  <h1>Hey look, a title</h1>
+</section>
+<section class="parallax">
+  <div class="bg"></div>
+  <h1>They just keep coming</h1>
+</section>
+<section class="parallax">
+  <div class="bg"></div>
+  <h1>So smooth though</h1>
+</section>
+<section class="parallax">
+  <div class="bg"></div>
+  <h1>Nice, right?</h1>
+</section>
+
+
 <style>
-
-
-  .parallax-container {
-    height: 100vh;
-    overflow: h idden;
-    position: relative;
-  }
-
-  .section {
+  section {
     position: relative;
     height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-    z-index: 1;
+    justify-content: center;
   }
 
-  .section-bg {
+  .bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
-    will-change: transform; /* Optimizes scrolling performance */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  h1 {
+    color: white;
+    text-shadow: 1px 1px 3px black;
+    z-index: 1;
+    font-size: 3em;
+    font-weight: 400;
   }
 </style>
-
-<div class="parallax-container">
-  {#each sections as { name, color }, index}
-    <div class="section">
-      <div
-        class="section-bg"
-        style="background-color: {color}; transform: translateY({scrollY * (0.1 + index * 0.05)}px);"
-      ></div>
-      {name}
-    </div>
-  {/each}
-</div>
