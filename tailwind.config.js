@@ -3,8 +3,16 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			fontFamily: {
+				helvetica: ['"Helvetica"', 'Arial', 'sans-serif']
+			}
+		}
 	},
 
-	plugins: []
+	plugins: [
+		require('tailwind-scrollbar'),
+		
+		
+	]
 };
