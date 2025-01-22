@@ -2,23 +2,45 @@
 	// @ts-nocheck
 
 	import Tooltip from '$lib/Reusable Component/Tooltip.svelte';
-	import { ChevronDown, ChevronRight, ChevronLeft } from 'lucide-svelte';
+	import { ChevronDown, ChevronRight, ChevronLeft, ChevronDownCircle, User } from 'lucide-svelte';
+
 	// @ts-ignore
 
 	// @ts-ignore
 	import FaShoppingCart from 'svelte-icons/fa/FaShoppingCart.svelte';
 	// @ts-ignore
 	import GoThreeBars from 'svelte-icons/go/GoThreeBars.svelte';
+	import GoPerson from 'svelte-icons/go/GoPerson.svelte';
 
 	let isHovered = false;
+	let isHovered_Lg = false;
 	let isMenuHovered = false;
 	let isHoveredLogo = false;
+	let isHoveredCart_Lg = false;
+	let hoveredItem = null;
+	let submenuVisible = false;
+	let hideTimeout;
+
+	let isHoveredAccount = false;
 	// @ts-ignore
 	let isClicked = false;
-
+	let isOpen = false;
 	let activeItem = null;
 	let activeSubmenu = null;
 
+	function showSubmenu(name) {
+		clearTimeout(hideTimeout);
+		hoveredItem = name;
+		submenuVisible = true;
+		
+	}
+
+	function hideSubmenu() {
+		hideTimeout = setTimeout(() => {
+			submenuVisible = false;
+			hoveredItem = null;
+		}, 1000);
+	}
 	function toggleItem(name) {
 		if (activeItem === name) {
 			activeItem = null;
@@ -254,7 +276,7 @@
 			]
 		},
 		{
-			name: 'Screen Protector',
+			name: 'Screen Protectors',
 
 			children: [
 				{
@@ -448,9 +470,17 @@
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_mouse_events_have_key_events -->
-<nav class="">
+<nav class="md:hidden">
 	<div class=" fixed top-0 z-20 flex w-full items-center justify-between border-b border-zinc-500 bg-[#000000] px-6 py-6">
-		<div class="flex h-6 w-6 gap-96 text-white hover:text-[#FFBB00]" on:mouseenter={() => (isMenuHovered = true)} on:mouseleave={() => (isMenuHovered = false)}>
+		<!-- svelte-ignore a11y_click_events_have_key_events -->
+		<div
+			class="flex h-6 w-6 gap-96 text-white hover:text-[#FFBB00]"
+			on:mouseenter={() => (isMenuHovered = true)}
+			on:mouseleave={() => (isMenuHovered = false)}
+			on:click={() => {
+				isOpen = !isOpen;
+			}}
+		>
 			<GoThreeBars size="10" />
 
 			<Tooltip content={'Menu'} visible={isMenuHovered} position="left" />
@@ -473,130 +503,205 @@
 		</div>
 	</div>
 
-	<ul class=" fixed bottom-0 z-10 hidden h-[calc(100vh-72px)] w-full overflow-y-scroll bg-black text-xl !font-light">
-		{#each navData as data}
-			{#if data.url === undefined}
-				<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-				<!-- svelte-ignore a11y_click_events_have_key_events -->
-				<li class="mx-6 flex flex-col border-t border-zinc-500 bg-black py-10 text-white" on:click={() => toggleItem(data.name)}>
-					<div class="flex cursor-pointer items-center justify-between">
-						<p>{data.name}</p>
-
-						<ChevronRight color="white" />
+	{#if isOpen}
+		<ul class=" fixed bottom-0 z-10 h-[calc(100vh-72px)] w-full overflow-y-scroll bg-black text-xl !font-light text-white">
+			{#each navData as data}
+				<li class="mx-6 flex flex-col border-t border-zinc-500 bg-black py-8">
+					<!-- svelte-ignore a11y_click_events_have_key_events -->
+					<div class="flex cursor-pointer items-center justify-between" on:click={() => toggleItem(data.name)}>
+						<span>{data.name}</span>
+						{#if data.children}
+							<ChevronRight />
+						{/if}
 					</div>
 
 					{#if activeItem === data.name && data.children}
-						<ul class=" border-6 fixed bottom-0 left-0 z-10 h-[calc(100vh-72px)] w-full overflow-y-scroll border-green-500 bg-black px-6">
-							<li class="item-center flex border-b border-zinc-500 py-10">
-								<ChevronLeft class="my-auto mr-6" />
-								{data.name}
-							</li>
+						<ul class="submenu-list fixed bottom-0 left-0 z-10 h-[calc(100vh-72px)] w-full overflow-y-scroll border-zinc-50 bg-black px-6 pl-4">
+							<!-- svelte-ignore a11y_click_events_have_key_events -->
+							<span
+								class="flex items-center space-x-6 border-b border-zinc-500 py-8"
+								on:click={() => {
+									toggleItem(data.name);
+									console.log('hiiii');
+								}}><ChevronLeft class="my-auto" />{data.name}</span
+							>
 							{#each data.children as child}
-								{#if child.children?.name == undefined}
-									<li>
-										<p class="  mx -6 flex flex-col border-b border-zinc-500 py-8 text-white first-of-type:border-b last-of-type:border-b">
-											{child.name}---
-										</p>
-									</li>
-								{:else}
-									{#each child as data}
-										<li class="item-center flex flex justify-between border-b border-zinc-500 py-10">
-											{data}
-											<ChevronRight class="my-auto mr-6" />
-										</li>
-									{/each}
-								{/if}
+								<li class="submenu-item border-b border-zinc-500 py-8">
+									<!-- svelte-ignore a11y_click_events_have_key_events -->
+									<div
+										class="flex cursor-pointer items-center justify-between"
+										on:click={() => {
+											toggleSubmenu(child.name);
+										}}
+									>
+										<span> {child.name}</span>
+										{#if child.children}
+											<ChevronRight />
+										{/if}
+									</div>
+
+									{#if activeSubmenu === child.name && child.children}
+										<ul class="sub-submenu-list fixed bottom-0 left-0 z-10 h-[calc(100vh-72px)] w-full overflow-y-scroll border-zinc-500 bg-black px-6 pl-8">
+											<!-- svelte-ignore a11y_click_events_have_key_events -->
+											<span
+												class="flex items-center space-x-6 border-b border-zinc-500 py-8"
+												on:click={() => {
+													toggleSubmenu(child.name);
+												}}><ChevronLeft class="my-auto" />{child.name}</span
+											>
+											{#each child.children as subChild}
+												<li class="sub-submenu-item border-b border-zinc-500 py-8">
+													<a href={subChild.url || '#'}>{subChild.name}</a>
+												</li>
+											{/each}
+										</ul>
+									{/if}
+								</li>
 							{/each}
 						</ul>
 					{/if}
 				</li>
-			{:else}
-				<li class="mx-6 border-t border-zinc-500 py-8 text-white">{data.name}llll</li>
-			{/if}
-		{/each}
-	</ul>
-
-	<ul class=" fixed bottom-0 z-10 h-[calc(100vh-72px)] w-full overflow-y-scroll bg-black text-xl !font-light text-white">
-		{#each navData as data}
-			<li class="mx-6 flex flex-col border-t border-zinc-500 bg-black py-8">
-				<!-- svelte-ignore a11y_click_events_have_key_events -->
-				<div class="flex cursor-pointer items-center justify-between" on:click={() => toggleItem(data.name)}>
-					<span>{data.name}</span>
-					{#if data.children}
-						<ChevronRight />
-					{/if}
-				</div>
-
-				{#if activeItem === data.name && data.children}
-					<ul class="submenu-list fixed bottom-0 left-0 z-10 h-[calc(100vh-72px)] w-full overflow-y-scroll border-zinc-50 bg-black px-6 pl-4">
-						<!-- svelte-ignore a11y_click_events_have_key_events -->
-						<span
-							class="flex items-center space-x-6 border-b border-zinc-500 py-8"
-							on:click={() => {
-								toggleItem(data.name);
-								console.log('hiiii');
-							}}><ChevronLeft class="my-auto" />{data.name}</span
-						>
-						{#each data.children as child}
-							<li class="submenu-item border-b border-zinc-500 py-8">
-								<!-- svelte-ignore a11y_click_events_have_key_events -->
-								<div class="flex cursor-pointer items-center justify-between" on:click={() => {toggleSubmenu(child.name)}}>
-									<span> {child.name}</span>
-									{#if child.children}
-										<ChevronRight />
-									{/if}
-								</div>
-
-								{#if activeSubmenu === child.name && child.children}
-									<ul class="sub-submenu-list fixed bottom-0 left-0 z-10 h-[calc(100vh-72px)] w-full overflow-y-scroll border-zinc-500 bg-black px-6 pl-8">
-										<!-- svelte-ignore a11y_click_events_have_key_events -->
-										<span
-											class="flex items-center space-x-6 border-b border-zinc-500 py-8"
-											on:click={() => {
-												toggleSubmenu(child.name);
-												
-											}}><ChevronLeft class="my-auto" />{child.name}</span
-										>
-										{#each child.children as subChild}
-											<li class="sub-submenu-item py-8 border-b border-zinc-500 ">
-												<a href={subChild.url || '#'}>{subChild.name}</a>
-											</li>
-										{/each}
-									</ul>
-								{/if}
-							</li>
-						{/each}
-					</ul>
-				{/if}
-			</li>
-		{/each}
-	</ul>
+			{/each}
+		</ul>
+	{/if}
 </nav>
 
-<!-- <ul class="ml-4 mt-2 space-y-1">
-	{#each child?.children as subChild}
-		<li class="text-xs text-gray-400 hover:text-white">{subChild.name}</li>
-	{/each}
-</ul> -->
+<nav class="hidden md:block">
+	<li class=" flex items-center justify-around bg-[#000000]">
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<div class="" on:mouseleave={() => (isHoveredCart_Lg = false)} on:mouseenter={() => (isHoveredCart_Lg = true)}>
+			{#if isHoveredCart_Lg}
+				<img src="/images/logo_inverted_lg.svg" alt="logo" class="my-auto mb-1 h-3 w-8 cursor-pointer" on:mouseleave={() => (isHoveredCart_Lg = false)} on:mouseenter={() => (isHoveredCart_Lg = true)} />
+			{:else}
+				<img src="/images/lg_logo.png" alt="logo" class=" my-auto mb-1 h-3 w-8 cursor-pointer invert" />
+			{/if}
+		</div>
+		{#each navData as data}
+			{#if data.name === 'Account'}
+				<img src="/images/account_avatar.png" alt="logo" class="h-4 w-4 cursor-pointer invert" on:mouseleave={() => (isHoveredAccount = false)} on:mouseenter={() => (isHoveredAccount = true)} />
+
+				<Tooltip content={'Account'} position={'almost_ending_right'} visible={isHoveredAccount} />
+			{:else}
+				<ul class="delay-50 cursor-pointer list-none text-wrap border-b-4 border-[#FFBB00] border-transparent py-6 text-white transition-all hover:border-b-4 hover:border-[#FFBB00] hover:text-[#FFBB00]" on:mouseenter={() => showSubmenu(data.name)} on:mouseleave={hideSubmenu}>
+					<span class="">{data.name}</span>
+				</ul>
+			{/if}
+		{/each}
+
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<span on:mouseenter={() => (isHovered_Lg = true)} on:mouseleave={() => (isHovered_Lg = false)} class="h-4 w-4 cursor-pointer text-white hover:text-[#FFBB00]"><FaShoppingCart size="10" /></span>
+		<Tooltip content={'Cart'} position={'ending_right'} visible={isHovered_Lg} />
+	</li>
+
+	
+
+
+
+	{#each navData as data}
+
+
+	
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  {#if data.url == undefined}
+    <div 
+      class="submenu   {submenuVisible ? 'visible' : ''} h-screen bg-black/30 " 
+      
+    >
+      {#if hoveredItem === data.name && data.url == undefined}
+        <div 
+          class="border-t border-zinc-500 bg-black py-4 text-white " 
+         on:mouseenter={() => showSubmenu(data.name)} 
+          on:mouseleave={hideSubmenu}
+        >
+          
+          <div class="w-[85%] mx-auto py-6 flex justify-between items-center">
+            <h2 class="text-2xl">{data.name == 'Ghost' ? 'Clear Cases' : data.name}</h2>
+            {#if data.name != 'Gaming'}
+              <button class="rounded-md cursor-pointer bg-[#FFBB00] px-6 py-3 uppercase text-black">
+                {data.name == 'Ghost' 
+                  ? 'Buy Now' 
+                  : data.name == 'Skins' 
+                  ? 'Shop All' 
+                  : data.name == 'Cases' 
+                  ? 'Shop All' 
+                  : data.name == 'Screen Protectors' 
+                  ? 'Shop All' 
+                  : data.name == 'Help' 
+                  ? 'Email Us' 
+                  : null}
+              </button>
+            {/if}
+          </div>
+
+          <!-- Nested Children -->
+          <div class="border-t border-zinc-500 pt-6  justify-between w-[85%] text-white mx-auto flex">
+            {#each data.children as child}
+              {#if child.children}
+		<div class="pb-4">
+                <!-- Render Child Name -->
+                <h3 class="text-sm uppercase font-bold">{child.name}</h3>
+
+                <!-- Check for Further Nested Children -->
+                {#if child.children}
+                  <ul class="">
+                    {#each child.children as subChild}
+                      <li class="py-2">
+                        <!-- Render Sub-Child Name with URL -->
+                        <a href={subChild.url} class="text-zinc-600 text-sm hover:text-[#FFBB00]">
+                          {subChild.name}
+                        </a>
+                      </li>
+                    {/each}
+                  </ul>
+                {/if}
+              </div>
+	      {/if}
+            {/each}
+          </div>
+        </div>
+      {/if}
+    </div>
+  {/if}
+{/each}
+
+
+</nav>
 
 <style>
-	/* width */
 	::-webkit-scrollbar {
 		width: 4px;
 	}
 
-	/* Track */
 	::-webkit-scrollbar-track {
 		background: transparent;
 	}
 
-	/* Handle */
 	::-webkit-scrollbar-thumb {
 		background: #888;
 	}
 
-	/* Handle on hover */
 	::-webkit-scrollbar-thumb:hover {
 		background: #555;
+	}
+
+	.submenu {
+		top: 0%;
+		left: 0;
+		width: 100%;
+		z-index: 1000;
+		
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-10px);
+		transition:
+			opacity 0.3s ease-in-out,
+			visibility 0.3s ease-in-out,
+			transform 0.3s ease-in-out;
+	}
+
+	.submenu.visible {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
 	}
 </style>

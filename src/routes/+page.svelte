@@ -4,4 +4,4 @@
 </script>
 
 
-<Parallax/>
+
