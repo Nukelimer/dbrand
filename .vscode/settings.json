@@ -1,6 +1,6 @@
 {
 	"editor.defaultFormatter": "mblode.pretty-formatter",
 	"[svelte]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "svelte.svelte-vscode"
 	}
 }

@@ -567,7 +567,7 @@
 </nav>
 
 <nav class="hidden md:block">
-	<li class=" flex items-center justify-around bg-[#000000]">
+	<li class=" flex items-center justify-around bg-[#000000] z-50">
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div class="" on:mouseleave={() => (isHoveredCart_Lg = false)} on:mouseenter={() => (isHoveredCart_Lg = true)}>
 			{#if isHoveredCart_Lg}
@@ -602,51 +602,60 @@
 
 	
   <!-- svelte-ignore a11y_no_static_element_interactions -->
-  {#if data.url == undefined}
+ {#if data.url == undefined}
+  <!-- Overlay -->
+  {#if submenuVisible}
     <div 
-      class="submenu   {submenuVisible ? 'visible' : ''} h-screen bg-black/30 " 
-      
-    >
-      {#if hoveredItem === data.name && data.url == undefined}
-        <div 
-          class="border-t border-zinc-500 bg-black py-4 text-white " 
-         on:mouseenter={() => showSubmenu(data.name)} 
-          on:mouseleave={hideSubmenu}
-        >
-          
-          <div class="w-[85%] mx-auto py-6 flex justify-between items-center">
-            <h2 class="text-2xl">{data.name == 'Ghost' ? 'Clear Cases' : data.name}</h2>
-            {#if data.name != 'Gaming'}
-              <button class="rounded-md cursor-pointer bg-[#FFBB00] px-6 py-3 uppercase text-black">
-                {data.name == 'Ghost' 
-                  ? 'Buy Now' 
-                  : data.name == 'Skins' 
-                  ? 'Shop All' 
-                  : data.name == 'Cases' 
-                  ? 'Shop All' 
-                  : data.name == 'Screen Protectors' 
-                  ? 'Shop All' 
-                  : data.name == 'Help' 
-                  ? 'Email Us' 
-                  : null}
-              </button>
-            {/if}
-          </div>
+      class="fixed top-20 inset-0 bg-zinc-200 bg-opacity-50 z-10" 
+      on:click={hideSubmenu}
+    ></div>
+  {/if}
 
-          <!-- Nested Children -->
-          <div class="border-t border-zinc-500 pt-6  justify-between w-[85%] text-white mx-auto flex">
-            {#each data.children as child}
-              {#if child.children}
-		<div class="pb-4">
+  <!-- Main Menu -->
+  <div 
+    class="submenu relative {submenuVisible ? 'visible' : ''} z-20"
+    on:mouseenter={() => (submenuVisible = true)} 
+    on:mouseleave={hideSubmenu}
+  >
+    {#if hoveredItem === data.name && data.url == undefined}
+      <div 
+        class="absolute top-0 left-0 w-full bg-black text-white border-t border-zinc-500 py-4"
+        on:mouseenter={() => showSubmenu(data.name)} 
+        on:mouseleave={hideSubmenu}
+      >
+        <!-- Main Item Header -->
+        <div class="w-[85%] mx-auto py-6 flex justify-between items-center">
+          <h2 class="text-2xl">{data.name == 'Ghost' ? 'Clear Cases' : data.name}</h2>
+          {#if data.name != 'Gaming'}
+            <button class="rounded-md cursor-pointer bg-[#FFBB00] px-6 py-3 uppercase text-black">
+              {data.name == 'Ghost' 
+                ? 'Buy Now' 
+                : data.name == 'Skins' 
+                ? 'Shop All' 
+                : data.name == 'Cases' 
+                ? 'Shop All' 
+                : data.name == 'Screen Protectors' 
+                ? 'Shop All' 
+                : data.name == 'Help' 
+                ? 'Email Us' 
+                : null}
+            </button>
+          {/if}
+        </div>
+
+        <!-- Nested Children -->
+        <div class="border-t border-zinc-500 pt-6 flex justify-between w-[85%] text-white mx-auto">
+          {#each data.children as child}
+            {#if child.children}
+              <div class="pb-4">
                 <!-- Render Child Name -->
                 <h3 class="text-sm uppercase font-bold">{child.name}</h3>
 
-                <!-- Check for Further Nested Children -->
+                <!-- Render Further Nested Children -->
                 {#if child.children}
-                  <ul class="">
+                  <ul class="pl-4">
                     {#each child.children as subChild}
                       <li class="py-2">
-                        <!-- Render Sub-Child Name with URL -->
                         <a href={subChild.url} class="text-zinc-600 text-sm hover:text-[#FFBB00]">
                           {subChild.name}
                         </a>
@@ -655,17 +664,19 @@
                   </ul>
                 {/if}
               </div>
-	      {/if}
-            {/each}
-          </div>
+            {/if}
+          {/each}
         </div>
-      {/if}
-    </div>
-  {/if}
+      </div>
+    {/if}
+  </div>
+{/if}
+
 {/each}
 
 
 </nav>
+
 
 <style>
 	::-webkit-scrollbar {
@@ -689,7 +700,6 @@
 		left: 0;
 		width: 100%;
 		z-index: 1000;
-		
 		opacity: 0;
 		visibility: hidden;
 		transform: translateY(-10px);
