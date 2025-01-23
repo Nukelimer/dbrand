@@ -1,4 +1,4 @@
-<script>
+ <script>
 	import { onMount } from 'svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -37,17 +37,21 @@
 					scrub: true
 				}
 			});
+
+			
 		});
 	});
 </script>
 
 {#each sections as { text, image }, i}
-	<section class="parallax">
-		<div class="bg"></div>
-		<div class="content">
-			{#each text as line}
-				<h1>{line}</h1>
-			{/each}
+	<section class="parallax font-helvetica">
+		<div class="bg !w-full !object-scale-down"></div>
+		<div class="content absolute bottom-0 flex w-full flex-col items-center justify-between bg-white px-12 !text-left sm:flex-row">
+			<div class="">
+				<h1 class="text-center font-helvetica text-4xl !font-bold uppercase !text-black sm:text-start sm:text-6xl">{text[0]}</h1>
+				<h3 class="pb-10 text-center text-xl sm:text-start sm:text-3xl">{text[1]}</h3>
+			</div>
+			<button class="mb-8 rounded bg-black px-8 py-6 text-2xl uppercase text-white sm:mb-0">{text[2]}</button>
 		</div>
 	</section>
 {/each}
@@ -70,10 +74,11 @@
 		width: 100%;
 		height: 100%;
 		z-index: -1;
-		background-size: cover;
+		background-size: 200vh;
 		background-position: center;
 		background-attachment: fixed;
 		background-repeat: no-repeat;
+		
 	}
 
 	.content {
@@ -82,10 +87,8 @@
 	}
 
 	h1 {
-		color: white;
-		text-shadow: 1px 1px 3px black;
-		font-size: 2.5em;
 		font-weight: 400;
 		margin: 0.5em 0;
 	}
-</style>
+</style> 
+
