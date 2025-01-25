@@ -41,11 +41,22 @@
 {#each sections as section, index}
 	<section class="section -z-50 !flex !h-screen !w-screen" data-section={index}>
 		<div class=" flex flex-col -translate-y-14 justify-center items-center  !h-full w-1/2 max-w-[40%] ">
-		<div class=" w-[80%]">
+	{#if section.url}
+<div class=" w-[80%]">
+      <h1 class="text-7xl font-bold font-helvetica text-start uppercase">{section.text[0]}</h1>
+    <p class="text-2xl text-start mr-auto my-6 font-helvetica">{section.text[1]}</p>
+   <a href="{section.text[3]}">
+     <button class="text-white text-2xl uppercase font-helvetica font-semibold bg-black py-6 px-8 rounded">{section.text[2]}</button>
+   </a>
+    </div> 
+
+  {:else}
+	<div class=" w-[80%]">
       <h1 class="text-7xl font-bold font-helvetica text-start uppercase">{section.text[0]}</h1>
     <p class="text-2xl text-start mr-auto my-6 font-helvetica">{section.text[1]}</p>
     <button class="text-white text-2xl uppercase font-helvetica font-semibold bg-black py-6 px-8 rounded">{section.text[2]}</button>
-    </div>
+    </div>    
+  {/if}
 		</div>
 
 		<div class="section__wrap max-w-[60%] top-0 bottom-0  ">

@@ -60,7 +60,7 @@
 			image: '/images/landing_page/carnage.webp'
 		},
 		{
-			text: ['MKBHD Keycaps', 'Yes, they come in matte black.', 'Shop Now'],
+			text: ['MKBHD Keycaps', 'Yes, they come in matte black.', 'Shop Now', '/limited-edition/mkbhd-keycaps'],
 			image: '/images/landing_page/mkbhd_keycaps.webp'
 		},
 		{

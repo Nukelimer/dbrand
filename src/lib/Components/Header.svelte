@@ -470,10 +470,10 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_mouse_events_have_key_events -->
 <nav class="md:hidden">
-	<div class=" fixed top-0 z-20 flex w-full items-center justify-between border-b border-zinc-500 bg-[#000000] px-6 py-6">
+	<div class=" fi xed top-0 z-20 flex max-w-screen items-center justify-between border-b border-zinc-500 bg-[#000000] px-6  py-6">
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<div
-			class="flex h-6 w-6 gap-96 text-white hover:text-[#FFBB00]"
+			class="flex h-6 w-6 gap -96 text-white hover:text-[#FFBB00]"
 			on:mouseenter={() => (isMenuHovered = true)}
 			on:mouseleave={() => (isMenuHovered = false)}
 			on:click={() => {
@@ -598,7 +598,7 @@
 			<!-- Overlay -->
 			{#if submenuVisible}
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
-				<div class="fixed inset-0 top-20 z-10 bg-zinc-200 bg-opacity-50" on:click={hideSubmenu}></div>
+				<div class="fixed h-screen inset-0 top-20 z-10 bg-black" on:click={hideSubmenu}></div>
 			{/if}
 
 			<!-- Main Menu -->
