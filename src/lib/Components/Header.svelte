@@ -596,7 +596,7 @@
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		{#if data.url == undefined}
 			<!-- Overlay -->
-			{#if submenuVisible}
+			{#if data.url == undefined && hoveredItem === data.name}
 				<!-- svelte-ignore a11y_click_events_have_key_events -->
 				<div class="fixed h-screen inset-0 top-20 z-10 bg-black" on:click={hideSubmenu}></div>
 			{/if}

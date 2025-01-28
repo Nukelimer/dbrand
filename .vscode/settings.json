@@ -2,5 +2,8 @@
 	"editor.defaultFormatter": "mblode.pretty-formatter",
 	"[svelte]": {
 		"editor.defaultFormatter": "svelte.svelte-vscode"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }
