@@ -1,7 +1,6 @@
 <script>
 	import CountUp from '$lib/Reusable Component/CountUp.svelte';
 
-	
 	import { ArrowDownRight, ArrowUpRight, Cherry, ChevronRightCircle } from 'lucide-svelte';
 	import ShowoffGhost from '../shop/ghost/components/Showoff_Ghost.svelte';
 
@@ -754,8 +753,8 @@
 	$: showScreenProtector = model === 'S25_Ultra' || model === 'I_16_P_Max';
 </script>
 
-<div class=" max-w-[1300px] mx-auto  flex flex-col items-center px-12 lg:px-0 md:flex-row  md:relative">
-	<h1 class="md:absolute lg:left-4 z-10 max-w-96 md:max-w-52 font-helvetica text-7xl font-medium">Ghost Case <span class=" custom-outline bg-transparent bg-clip-text font-bold text-transparent"> 2.0 </span></h1>
+<div class=" mx-auto flex max-w-[1300px] flex-col items-center px-12 md:relative md:flex-row lg:px-0">
+	<h1 class="z-10 max-w-96 font-helvetica text-7xl font-medium md:absolute md:max-w-52 lg:left-4">Ghost Case <span class=" custom-outline bg-transparent bg-clip-text font-bold text-transparent"> 2.0 </span></h1>
 	<div class=" mx-auto">
 		{#if images.length > 0}
 			<div class="relative">
@@ -765,11 +764,11 @@
 		{/if}
 	</div>
 
-	<div class="md:absolute right-3 top-0 flex w-full md:w-fit    flex-col gap-3 !text-gray-700">
-		<p class=" mt-2 md:w-[90%]  md:ml-auto text-lg">The next-gen clear case.</p>
+	<div class="right-3 top-0 flex w-full flex-col gap-3 !text-gray-700 md:absolute md:w-fit">
+		<p class=" mt-2 text-lg md:ml-auto md:w-[90%]">The next-gen clear case.</p>
 
-		<div class="relative w-full md:w-[90%] md:ml-auto  ">
-			<select class="appearance -none w-full rounded-3xl md:backdrop-blur-3xl border border-black bg-transparent px-4 py-3 !pl-10 uppercase text-gray-700" bind:value={model}>
+		<div class="relative w-full md:ml-auto md:w-[90%]">
+			<select class="appearance -none w-full rounded-3xl border border-black bg-transparent px-4 py-3 !pl-10 uppercase text-gray-700 md:backdrop-blur-3xl" bind:value={model}>
 				<option value="S25_Ultra">Samsung S25 Ultra</option>
 				<option value="I_16_P_Max">iPhone 16 Pro Max</option>
 				<option value="I_16_P">iPhone 16</option>
@@ -783,15 +782,15 @@
 			</div>
 		</div>
 
-		<div class="relative flex w-full flex-row-reverse items-center rounded-3xl border border-black px-4 md:w-[90%] md:ml-auto md:backdrop-blur-3xl ">
+		<div class="relative flex w-full flex-row-reverse items-center rounded-3xl border border-black px-4 md:ml-auto md:w-[90%] md:backdrop-blur-3xl">
 			<input id="mag" type="checkbox" class="h-5 w-5 min-w-5 appearance-none rounded-full border border-black checked:border-black checked:bg-black checked:text-white" />
 
 			<label for="mag" class=" ml-6 flex w-full cursor-pointer select-none items-center justify-between bg-transparent py-3 uppercase transition"> Magsafe </label>
 		</div>
 
 		{#if showScreenProtector}
-			<div class="flex w-full gap-4 md:w-[90%] md:ml-auto  ">
-				<div class="relative flex w-full flex-row-reverse md:backdrop-blur-3xl items-center rounded-3xl border border-black px-4">
+			<div class="flex w-full gap-4 md:ml-auto md:w-[90%]">
+				<div class="relative flex w-full flex-row-reverse items-center rounded-3xl border border-black px-4 md:backdrop-blur-3xl">
 					<input id="protector" type="checkbox" class="h-5 w-5 min-w-5 appearance-none rounded-full border border-black checked:border-black checked:bg-black checked:text-white" />
 
 					<label for="protector" class=" ml-6 flex w-full cursor-pointer select-none items-center justify-between bg-transparent py-3 uppercase transition"> 2X Screen protectors </label>
@@ -803,8 +802,8 @@
 			</div>
 		{/if}
 
-		<div class="flex w-full md:w-[90%] md:ml-auto  gap-4">
-			<div class="relative flex w-full flex-row-reverse md:backdrop-blur-3xl items-center rounded-3xl border border-black px-4">
+		<div class="flex w-full gap-4 md:ml-auto md:w-[90%]">
+			<div class="relative flex w-full flex-row-reverse items-center rounded-3xl border border-black px-4 md:backdrop-blur-3xl">
 				<input id="skin" type="checkbox" class="h-5 w-5 min-w-5 appearance-none rounded-full border border-black checked:border-black checked:bg-black checked:text-white" />
 
 				<label for="skin" class=" ml-6 flex w-full cursor-pointer select-none items-center justify-between bg-transparent py-3 uppercase transition"> teardown skin </label>
@@ -815,8 +814,8 @@
 			</div>
 		</div>
 
-		<div class="bg-red- 500 flex w-full justify-between ">
-			<div class=" ml-10 flex flex-col md:mt-2 md:mr-2">
+		<div class="bg-red- 500 flex w-full justify-between">
+			<div class=" ml-10 flex flex-col md:mr-2 md:mt-2">
 				<span class="line-through opacity-35">${Number.parseFloat(33).toFixed(2)}</span>
 				<span>${Number.parseFloat(43).toFixed(2)}</span>
 			</div>
@@ -832,61 +831,82 @@
 	</div>
 </div>
 
-<div class="w-full hidden md:flex flex-col mt-48 ">
-<label for="" class="text-center  flex mx-auto justify-center">Rotate</label>
-	<input step={1} type="range" min={0} max={images.length - 1} bind:value={index} class="mx-auto " />
+<div class="mt-48 hidden w-full flex-col md:flex">
+	<label for="" class="mx-auto flex justify-center text-center">Rotate</label>
+	<input step={1} type="range" min={0} max={images.length - 1} bind:value={index} class="mx-auto" />
 </div>
 
+<div class="mt-12 grid max-w-[1300px] grid-cols-2 place-items-center gap-4 md:grid-cols-4 lg:mx-auto">
+	<div class="flex w-full flex-col items-center justify-center p-16 md:text-wrap">
+		<span class="mb-2 text-3xl"><CountUp value={1.8} duration={1500} />mm</span>
+		<p class="text-center uppercase text-zinc-500">Thin</p>
+	</div>
 
+	<div class="flex w-full flex-col items-center justify-center p-16 md:text-wrap">
+		<span class="mb-2 text-3xl"><CountUp value={44} duration={1500} />g</span>
+		<p class="text-center text-sm uppercase text-zinc-500">Light</p>
+	</div>
 
+	<div class="flex w-full flex-col items-center justify-center p-16 md:text-wrap">
+		<span class="mb-2 text-3xl"><CountUp value={12} duration={1500} />ft</span>
+		<p class="text-center text-sm uppercase text-zinc-500">Drop Protection</p>
+	</div>
 
-<div class="grid grid-cols-2 md:grid-cols-4 place-items-center gap-4 mt-12  max-w-[1300px] lg:mx-auto">
-  <div class="w-full p-16 md:text-wrap flex flex-col justify-center items-center">
-    <span class="text-3xl mb-2"><CountUp value={1.8} duration={1500} />mm</span>
-    <p class="uppercase text-zinc-500 text-center">Thin</p>
-  </div>
-
-  <div class="w-full p-16 md:text-wrap flex flex-col justify-center items-center">
-    <span class="text-3xl mb-2"><CountUp value={44} duration={1500} />g</span>
-    <p class="uppercase text-zinc-500 text-center text-sm">Light</p>
-  </div>
-
-  <div class="w-full p-16 md:text-wrap flex flex-col justify-center items-center">
-    <span class="text-3xl mb-2"><CountUp value={12} duration={1500} />ft</span>
-    <p class="uppercase text-zinc-500 text-center text-sm">Drop Protection</p>
-  </div>
-
-  <div class="w-full p-16 md:text-wrap flex flex-col justify-center items-center">
-    <span class="text-3xl mb-2 text-nowrap"><CountUp value={100} duration={1500} />pct</span>
-    <p class="uppercase text-zinc-500 text-center text-sm">Anti-Yellowing</p>
-  </div>
+	<div class="flex w-full flex-col items-center justify-center p-16 md:text-wrap">
+		<span class="mb-2 text-nowrap text-3xl"><CountUp value={100} duration={1500} />pct</span>
+		<p class="text-center text-sm uppercase text-zinc-500">Anti-Yellowing</p>
+	</div>
 </div>
 
+<ShowoffGhost
+	heading_text="The next-gen clear case."
+	tagline="Go invisible"
+	text="Galaxy S25 Ultra clear cases are boring, featureless slabs of transparent plastic that disappoint you, your wallet & your phone. The Ghost Case is none of these things. Well, aside from transparent."
+	video_src="/video/shop/ghost/Block 1 - S25 Ultra - MagSafe.mp4"
+/>
+
+<ShowoffGhost
+	heading_text="You’ll die before it yellows."
+	tagline="Guaranteed"
+	text="Every clear case you’ve ever owned promised anti-yellowing. Unsurprisingly, they all yellowed. The Ghost succeeds where others have failed. We're so confident that we've figured out zero-yellowing, we'll replace your Ghost for free if it ever turns yellow. No conditions, no fine print. Just an incredible offer that you’ll never get to take advantage of."
+	video_src="/video/shop/ghost/Block 2 - S25 Ultra - MagSafe.mp4"
+	overide_position='flex-row-reverse'
+/>
+
+<ShowoffGhost
+	heading_text="Enhanced scratch resistance."
+	tagline="Goodbye, micro-scratches"
+	text="The Ghost 2.0 is treated with a zero-yellowing anti-scratch solution—the first of its kind. After being injection molded with a high-strength polymer, it’s sealed with a proprietary solution and chemically hardened through a process we’d rather not disclose. The result? An invisible shield against everyday scuffs and scratches. We'd love to tell you more, but it's classified."
+	video_src="/video/shop/ghost/Block 3 - Universal - Magsafe.mp4"
+/>
+
+<video autoplay muted loop playsinline webkit-playsinline disableremoteplayback class="z-10 mx-auto mb-24 max-h-[400px] min-h-[300px] md:px-8 w-full min-w-[400px] object-cover">
+	<source src={'/video/shop/ghost/Block 4 - Galaxy S25 Ultra - MagSafe.mp4'} type="video/mp4" />
+</video>
+
+
+<ShowoffGhost
+	heading_text="Protection without bulk."
+	tagline="Face your fears."
+	text="These distinctive corner bumpers aren’t just for show - they’re designed to protect your phone’s most vulnerable points of impact... all while keeping the rest of the Ghost just 1.8mm thin."
+	video_src="/video/shop/ghost/Block 5 - Samsung - Universal.mp4"
+/>
 
 
 
-
-
-
-
-
-<ShowoffGhost />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<ShowoffGhost
+	heading_text="Our strongest magnets ever."
+	tagline="Live untethered."
+	text="Within each Ghost Case is an array of eighteen custom-built, ultra-powerful, Qi2-compatible magnets. Whether paired with a charger or a car mount, the Ghost keeps your phone secured."
+	video_src="/video/shop/ghost/Block 6 - Universal.mp4"
+	overide_position='flex-row-reverse'
+/>
+<ShowoffGhost
+	heading_text="Details you can feel."
+	tagline="Extrasensory Perception."
+	text="Every inch of the Ghost 2.0 was engineered with purpose. From the matte finish of the ribbed side rails to our signature extra-clicky buttons, every detail was considered to create the most tactile experience possible."
+	video_src="/video/shop/ghost/Block 7 - Universal.mp4"
+/>
 
 <style>
 	input[type='checkbox']:checked {
@@ -954,7 +974,6 @@
 		width: 100%;
 		max-width: 300px;
 		margin: 2em auto;
-		
 	}
 
 	input[type='range']::-webkit-slider-thumb {
