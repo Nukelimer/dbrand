@@ -870,7 +870,7 @@
 	tagline="Guaranteed"
 	text="Every clear case you’ve ever owned promised anti-yellowing. Unsurprisingly, they all yellowed. The Ghost succeeds where others have failed. We're so confident that we've figured out zero-yellowing, we'll replace your Ghost for free if it ever turns yellow. No conditions, no fine print. Just an incredible offer that you’ll never get to take advantage of."
 	video_src="/video/shop/ghost/Block 2 - S25 Ultra - MagSafe.mp4"
-	overide_position='flex-row-reverse'
+	overide_position="flex-row-reverse"
 />
 
 <ShowoffGhost
@@ -880,10 +880,9 @@
 	video_src="/video/shop/ghost/Block 3 - Universal - Magsafe.mp4"
 />
 
-<video autoplay muted loop playsinline webkit-playsinline disableremoteplayback class="z-10 mx-auto mb-24 max-h-[400px] min-h-[300px] md:px-8 w-full min-w-[400px] object-cover">
+<video autoplay muted loop playsinline webkit-playsinline disableremoteplayback class="z-10 mx-auto mb-24 max-h-[400px] min-h-[300px] w-full min-w-[400px] object-cover md:px-8">
 	<source src={'/video/shop/ghost/Block 4 - Galaxy S25 Ultra - MagSafe.mp4'} type="video/mp4" />
 </video>
-
 
 <ShowoffGhost
 	heading_text="Protection without bulk."
@@ -892,14 +891,12 @@
 	video_src="/video/shop/ghost/Block 5 - Samsung - Universal.mp4"
 />
 
-
-
 <ShowoffGhost
 	heading_text="Our strongest magnets ever."
 	tagline="Live untethered."
 	text="Within each Ghost Case is an array of eighteen custom-built, ultra-powerful, Qi2-compatible magnets. Whether paired with a charger or a car mount, the Ghost keeps your phone secured."
 	video_src="/video/shop/ghost/Block 6 - Universal.mp4"
-	overide_position='flex-row-reverse'
+	overide_position="flex-row-reverse"
 />
 <ShowoffGhost
 	heading_text="Details you can feel."
@@ -934,7 +931,6 @@
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
-		margin: 0 auto;
 	}
 
 	option {
