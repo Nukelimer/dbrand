@@ -7,7 +7,7 @@
 </script>
 
 <div
-	class={`tooltip-container top-10  ${visible ? 'visible' : ''} ${position == 'left' ? '!left-10 !top-16': position == 'ending_right'? '!left-[97.6%]  !top-16' :position == 'almost_ending_right' ? '!left-[92.7%] !top-16': ''}`}
+	class={`tooltip-container  top-10  ${visible ? 'visible' : ''} ${position == 'left' ? '!left-10 !top-16': position == 'ending_right'? '!left-[97.6%]  !top-16' :position == 'almost_ending_right' ? '!left-[92.7%] !top-16': ''}`}
 >
 	<div class="tooltip-arrow"></div>
 	{content}
@@ -24,7 +24,7 @@
 		border-radius: 4px;
 		white-space: nowrap;
 		pointer-events: none;
-		z-index: 10;
+		z-index: 20;
 		opacity: 0;
 		transition:
 			opacity 0.4s,

@@ -470,7 +470,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <!-- svelte-ignore a11y_mouse_events_have_key_events -->
 <nav class="md:hidden">
-	<div class=" fi xed top-0 z-20 flex max-w-screen items-center justify-between border-b border-zinc-500 bg-[#000000] px-6  py-6">
+	<div class=" fi xed top-0 z-20 flex max-w-screen items-center justify-between bor der-b border-zinc-500 bg-[#000000] px-6  py-6">
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<div
 			class="flex h-6 w-6 gap -96 text-white hover:text-[#FFBB00]"
@@ -565,16 +565,28 @@
 	{/if}
 </nav>
 
-<nav class="hidden md:block">
-	<li class=" !z-50 flex items-center justify-around bg-[#000000]">
+<nav class="hidden md:block bg-black">
+	<li class=" 2xl:w-[1300px] mx-auto !z-50 flex items-center justify-around bg-[#000000]">
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div class="" on:mouseleave={() => (isHoveredCart_Lg = false)} on:mouseenter={() => (isHoveredCart_Lg = true)}>
+		<div class=" md:block lg:hidden" on:mouseleave={() => (isHoveredCart_Lg = false)} on:mouseenter={() => (isHoveredCart_Lg = true)}>
 			{#if isHoveredCart_Lg}
 				<img src="/images/logo_inverted_lg.svg" alt="logo" class="my-auto mb-1 h-3 w-8 cursor-pointer" on:mouseleave={() => (isHoveredCart_Lg = false)} on:mouseenter={() => (isHoveredCart_Lg = true)} />
 			{:else}
 				<img src="/images/lg_logo.png" alt="logo" class=" my-auto mb-1 h-3 w-8 cursor-pointer invert" />
 			{/if}
 		</div>
+
+
+
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<div class="md:hidden lg:block" on:mouseleave={() => (isHoveredLogo = false)} on:mouseenter={() => (isHoveredLogo = true)}>
+			{#if isHoveredLogo}
+				<img src="/images/logo_inverted.svg" alt="logo" class="hover: h-4 max-h-8 w-[120px] max-w-[200px] cursor-pointer" />
+			{:else}
+				<img src="/images/logo.png" alt="logo" class="hover: h-4 max-h-8 w-[120px] max-w-[200px] cursor-pointer invert" />
+			{/if}
+		</div>
+
 		{#each navData as data}
 			{#if data.name === 'Account'}
 				<img src="/images/account_avatar.png" alt="logo" class="h-4 w-4 cursor-pointer invert" on:mouseleave={() => (isHoveredAccount = false)} on:mouseenter={() => (isHoveredAccount = true)} />
