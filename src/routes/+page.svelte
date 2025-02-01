@@ -1,4 +1,6 @@
-<script>
+<script context="module">
+
+		export const ssr = false;
 	import Parallax from './components/Parallax.svelte';
 	import Parallax_LG from './components/Parallax_LG.svelte';
 
