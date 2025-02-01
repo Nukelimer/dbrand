@@ -1,48 +1,55 @@
- <script>
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+<script>
 	import { onMount } from 'svelte';
-	import { gsap } from 'gsap';
-
-	gsap.registerPlugin(ScrollTrigger);
 
 	export let sections = [];
 
-	onMount(() => {
-		gsap.utils.toArray('.parallax').forEach((section, i) => {
-			section.bg = section.querySelector('.bg');
+	let gsap;
+	let ScrollTrigger;
 
-			// Set background image
-			const bgImage = sections[i]?.image || '';
-			section.bg.style.backgroundImage = `url(${bgImage})`;
+	onMount(async () => {
+		if (typeof window !== 'undefined') {
+			const gsapModule = await import('gsap');
+			const ScrollTriggerModule = await import('gsap/ScrollTrigger');
 
-			// Parallax effect
-			section.bg.style.backgroundPosition = `50% ${innerHeight / 2}px`;
-			gsap.to(section.bg, {
-				backgroundPosition: `50% ${-innerHeight / 2}px`,
-				ease: 'none',
-				scrollTrigger: {
-					trigger: section,
-					scrub: true
-				}
+			gsap = gsapModule.gsap;
+			ScrollTrigger = ScrollTriggerModule.ScrollTrigger;
+
+			gsap.registerPlugin(ScrollTrigger);
+
+			gsap.utils.toArray('.parallax').forEach((section, i) => {
+				section.bg = section.querySelector('.bg');
+
+				// Set background image
+				const bgImage = sections[i]?.image || '';
+				section.bg.style.backgroundImage = `url(${bgImage})`;
+
+				// Parallax effect
+				section.bg.style.backgroundPosition = `50% ${innerHeight / 2}px`;
+				gsap.to(section.bg, {
+					backgroundPosition: `50% ${-innerHeight / 2}px`,
+					ease: 'none',
+					scrollTrigger: {
+						trigger: section,
+						scrub: true
+					}
+				});
+
+				// Fade out when 50% off screen
+				gsap.to(section, {
+					opacity: 0,
+					ease: 'none',
+					scrollTrigger: {
+						trigger: section,
+						start: 'top+=100 top',
+						end: 'bottom top-=600',
+						scrub: true
+					}
+				});
 			});
-
-			// Fade out when 50% off screen
-			gsap.to(section, {
-				opacity: 0,
-				ease: 'none',
-				scrollTrigger: {
-					trigger: section,
-					start: 'top+=100 top',
-					end: 'bottom top-=600',
-					scrub: true
-				}
-			});
-
-			
-		});
+		}
 	});
 </script>
+
 
 {#each sections as { text, image }, i}
 	<section class="parallax font-helvetica">
