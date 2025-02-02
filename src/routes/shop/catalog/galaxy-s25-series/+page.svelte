@@ -16,9 +16,11 @@
 			img: '/images/catalog/S25_S_Glass.webp',
 			name: 'Galaxy S25 series glass',
 			perk: 'save your screen',
-			url: 'shop/devices/samsung-galaxy-tempered-glass-screen-protectors'
+			url: '/shop/devices/samsung-galaxy-tempered-glass-screen-protectors'
 		}
 	];
+
+
 </script>
 
 <div class="h-full min-h-[100vh] bg-black text-white">
