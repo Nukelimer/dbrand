@@ -30,11 +30,11 @@
 
 		<div class=" w-full py-16 sm:gap-6 flex-col sm:flex sm:flex-row flex-wrap ">
 			{#each S25Series as { img, name, perk, url }}
-				<div class=" mx-auto my-12 sm:my-0 max-w-[485px] max-h-[576px] overflow-hidden hover:rounded-t-md rounded-t-md rounded-b-md  ">
+				<div class=" mx-auto my-12 sm:my-0 max-w-[485px] max-h-[676px] overflow-hidden hover:rounded-t-md rounded-t-md rounded-b-md  ">
 					
                                        <div class="overflow-hidden hover:rounded-t-md rounded-t-md ">
 
-                                         <img src={img} alt={name} class="rounded-t-md hover:rounded-t-md object-cover hover:scale-125 cursor-pointer delay-200 transition-transform" />
+                                         <img src={img} alt={name} class="rounded-t-md hover:rounded-t-md object-cover hover:scale-125 cursor-pointer delay-200 transition-transform min-h-[500px]" />
                                        </div>
 					<div class=" bg-[#292929] p-6">
 						<h3 class="pb-4 font-helvetica text-2xl font-semibold">{name}</h3>

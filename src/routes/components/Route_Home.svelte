@@ -2,6 +2,7 @@
 	export let productData = [];
 
 	export let product = '';
+	export let style = ''
 </script>
 
 <div class="h-full min-h-[100vh] bg-black text-white">
@@ -11,9 +12,9 @@
 
 		<div class=" mt-12 h-full w-full flex-col flex-wrap sm:flex sm:flex-row sm:gap-6 md:flex-nowrap">
 			{#each productData as { img, name, perk, url }}
-				<div class=" mx-auto mt-12 max-h-[576px] max-w-[405px] overflow-hidden rounded-b-md rounded-t-md hover:rounded-t-md sm:my-0">
+				<div class=" mx-auto mt-12 max-h-[676px] max-w-[405px] h-full overflow-hidden rounded-b-md rounded-t-md hover:rounded-t-md sm:my-0">
 					<div class="overflow-hidden rounded-t-md hover:rounded-t-md">
-						<img src={img} alt={name} class="h-full cursor-pointer rounded-t-md object-cover transition-transform delay-200 hover:scale-110 hover:rounded-t-md" />
+						<img src={img} alt={name} class="h-full min-h-[500px] cursor-pointer rounded-t-md object-cover transition-transform delay-200 hover:scale-110 hover:rounded-t-md" />
 					</div>
 					<div class=" bg-[#292929] p-6">
 						<h3 class="pb-4 font-helvetica text-xl font-semibold">{name}</h3>

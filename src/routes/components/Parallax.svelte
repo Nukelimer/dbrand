@@ -51,7 +51,7 @@
 </script>
 
 
-{#each sections as { text, image }, i}
+{#each sections as { text, image, url }, i}
 	<section class="parallax font-helvetica">
 		<div class="bg !w-full !object-scale-down"></div>
 		<div class="content absolute bottom-0 flex w-full flex-col items-center justify-between bg-white px-12 !text-left sm:flex-row">
@@ -59,7 +59,10 @@
 				<h1 class="text-center font-helvetica text-4xl !font-bold uppercase !text-black sm:text-start sm:text-6xl">{text[0]}</h1>
 				<h3 class="pb-10 text-center text-xl sm:text-start sm:text-3xl">{text[1]}</h3>
 			</div>
-			<button class="mb-8 rounded bg-black px-8 py-6 text-2xl uppercase text-white sm:mb-0">{text[2]}</button>
+			<a href="{url}">
+
+				<button class="mb-8 rounded bg-black px-8 py-6 text-2xl uppercase text-white sm:mb-0">{text[2]}</button>
+			</a>
 		</div>
 	</section>
 {/each}
