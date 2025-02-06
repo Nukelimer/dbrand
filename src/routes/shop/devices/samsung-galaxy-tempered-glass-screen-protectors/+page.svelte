@@ -70,14 +70,15 @@
 	</div>
 </div>
 
-
+<!-- 
 Making the most precise edge-to-edge <a href="/shop/prism/galaxy-z-fold-5-tempered-glass-screen-protectors">Galaxy Z Fold 5 screen protector</a> in the world is a trivial task for the robots at dbrand. The applicator tray included with our <a href="/shop/prism/galaxy-z-flip-5-tempered-glass-screen-protectors">Prism 2.0 Galaxy Z Flip 5 screen protector</a> makes your installation even easier. dbrand's <a href="/shop/prism/galaxy-s23-plus-tempered-glass-screen-protectors">Tempered Glass Galaxy S23 Plus screen protector</a> is ultra-thin, has smooth rounded edges, and is as hard as quartz - that's a 7 on the Moh's scale of hardness, if you've never seen a JerryRigEverything video.
 
 
 
-With 100% optical clarity and best-in-class oleophobic coating, it's everything your hands and eyes could ever want out of a <a href="/shop/prism/galaxy-s23-tempered-glass-screen-protectors">Galaxy S23 screen protector</a>. dbrand's <a href="/shop/prism/galaxy-s24-ultra-tempered-glass-screen-protectors">Galaxy S24 Ultra Tempered Glass</a>: it's like every other screen protector you've ever had... but better in every way.
+With 100% optical clarity and best-in-class oleophobic coating, it's everything your hands and eyes could ever want out of a <a href="/shop/prism/galaxy-s23-tempered-glass-screen-protectors">Galaxy S23 screen protector</a>. dbrand's <a href="/shop/prism/galaxy-s24-ultra-tempered-glass-screen-protectors">Galaxy S24 Ultra Tempered Glass</a>: it's like every other screen protector you've ever had... but better in every way. -->
 <div class="">
 	<ParallaxS25
+	
 		section={[
 			{
 				text: [
@@ -100,7 +101,7 @@ With 100% optical clarity and best-in-class oleophobic coating, it's everything 
 	/>
 </div>
 
-<div class="hidden">
+<div class="hid den">
 	Lorem ipsum dolor sit amet consectetur, adipisicing elit. At distinctio perspiciatis, corporis maxime voluptatem veniam nobis in dignissimos sint, modi voluptas incidunt repellat, doloribus itaque eum saepe. Odio, quam! Tempore deserunt cupiditate eius esse veniam, vitae eaque at hic perferendis
 	iste atque itaque quidem, id ad saepe veritatis modi iure debitis? Autem aliquid inventore aperiam architecto omnis sed dolores nesciunt libero dolorum nihil accusantium corporis cum hic, quaerat culpa perferendis veniam consequuntur sit. Sed nesciunt sapiente nostrum assumenda illum, voluptatum
 	saepe dolorem possimus facilis totam ad iste soluta, rem ut tempora debitis nulla placeat eaque alias pariatur voluptate neque harum! Maiores perspiciatis odit dolore nemo esse, rem recusandae velit facere impedit, inventore qui quasi rerum. Cumque mollitia provident cum, eaque similique nostrum

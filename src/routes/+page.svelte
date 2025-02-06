@@ -20,10 +20,10 @@
 		},
 		{
 			text: ['iPhone 16 Series', 'Now featuring a Camera Control button.', 'Make us Rich'],
-			url: '',
+			url: 'shop/catalog/iphone-16-series',
 			
 			image: '/images/landing_page/iphone_16_series.webp',
-			url: ''
+			
 		},
 		{
 			text: ['Circuit Board', 'Yes - it glows in the dark.', 'Glow Now'],
